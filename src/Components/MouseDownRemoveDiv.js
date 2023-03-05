@@ -20,7 +20,8 @@ function MouseDownRemoveDiv({ handleRemove, children }) {
     <button
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      onDoubleClick={handleRemove}>
+      onDoubleClick={handleRemove}
+      class = "tasks">
       {children}
     </button>
   );

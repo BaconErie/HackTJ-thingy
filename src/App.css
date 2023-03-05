@@ -1,22 +1,188 @@
+body {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    height: 100vh;
+    padding: 2rem;
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
 .header{
     position : relative;
+    padding: 1rem;
+    padding-bottom: 0rem;
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
 
-    height : 50px;
+}
+
+.header h3{
+    padding-bottom: 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    border-bottom: solid;
 }
 
 .blockedLocations{
-    position: absolute;
-    background-color: lightblue;
-
-    right : 0;
-    bottom: 0;
-
-    width : 250px;
+    position: fixed;
+    right : 4rem;
+    width : 45vw;
+    text-align: center;
 }
+
+.edit{
+    font-size: 14pt;
+}
+
 .blockedLocations button{
-    width : 100%;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    color: white;
+    margin: 1rem;
+    border-radius: 4px;
+    border: 2px solid #FFFFFF;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    text-align: center;
 }
+
+.desc{
+    font-size: 14pt;
+}
+
+.dropbtn {
+    background-color: rgba(255,255,255,0);
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: 2px solid #FFFFFF;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {
+    background-color: rgba(255,255,255,0.2);
+  }
 
 .main {
-    display: flex
+    padding-top: 3rem;
+    max-width: 48vw;
+}
+
+.border{
+    border: 2px solid #FFFFFF;
+    max-width: 45vw;
+    text-align: center;
+}
+
+.form{
+    padding: 3rem;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+
+.buttonInput{
+    height: 3rem;
+    width: 3rem;
+    margin-left: 0rem;
+    background: rgba(255,255,255,0);
+    border: 2px solid #FFFFFF;
+    border-radius: 4px;
+    color: white;
+}
+
+.inputInput{
+    background-color: rgba(255,255,255,0.13);
+    margin-left: 1rem;
+    width: 12rem;
+    height: 3rem;
+    padding-left: 0.35rem;
+    border: 2px solid #FFFFFF;
+    border-radius: 4px;
+    text-emphasis-color: white;
+    caret-color: white;
+    color: white;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    size: 1rem;
+    opacity: 1; /* Firefox */
+    font-size: 15px;
+}
+
+.task-data {
+    background: rgba(0,0,0,0);
+    border-radius: 4px;
+    font-size: 15px;
+    color: white;
+}
+
+.tasks-d{
+    display: flex;
+    width : 96%;
+    justify-content: space-between;
+    padding: 0.3rem;
+}
+
+.tasks {
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    color: white;
+    margin: 1rem;
+    border-radius: 4px;
+    border: 2px solid #FFFFFF;
+    color: white;
+    display: flex;
+    flex-direction: column;
 }

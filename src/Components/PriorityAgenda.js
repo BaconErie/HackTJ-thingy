@@ -25,28 +25,38 @@ function TaskAgenda() {
   };
 
   return (
-    <main>
-      <form onSubmit={addTask}>
-        <button type="submit">+</button>
-        <input type="text" placeholder="Name" name="name" />
-        <input
-          type="text"
-          placeholder="Expected Duration"
-          name="expectedTime"
-        />
-      </form>
-      <div className="TaskList">
-        {TaskList.map((Task, index) => (
-          <MouseDownRemoveDiv
-            key={index}
-            handleRemove={() => {
-              handleDeleteTask(index);
-            }}>
-            <p>{Task.name}</p>
-            <p>{Task.expectedTime}</p>
-          </MouseDownRemoveDiv>
-        ))}
+    <main class="main">
+      
+      <div>
+        <form class="form" onSubmit={addTask}>
+          <button class="buttonInput" type="submit">+</button>
+          <input class="inputInput" type="text" placeholder="Name" name="name" />
+          <input class="inputInput" type="text" placeholder="Expected Duration" name="expectedTime"/>
+        </form>
+
+        <div className="TaskList" class = "border">
+          <div class = "tasks">
+            {TaskList.map((Task, index) => (
+              <MouseDownRemoveDiv
+                key={index}
+                handleRemove={() => {
+                  handleDeleteTask(index);
+                }}>
+                <div class="tasks-d">
+                  <p class="task-data">{Task.name}</p>
+                  <p class="task-data">{Task.expectedTime}</p>
+                </div>
+              </MouseDownRemoveDiv>
+            ))}
+          </div>
+        </div>
       </div>
+
+      <div>
+
+
+      </div>
+
     </main>
   );
 }

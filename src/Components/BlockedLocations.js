@@ -46,7 +46,7 @@ function BlockedLocations() {
 
   return (
     <div>
-      <p>url</p>
+      <p class="desc">urls</p>
       {blockedLocations.url.map((url, index) => {
         return (
           <MouseDownRemoveDiv
@@ -58,7 +58,7 @@ function BlockedLocations() {
           </MouseDownRemoveDiv>
         );
       })}
-      <p>category</p>
+      <p class="desc">categories</p>
       {blockedLocations.category.map((category, index) => {
         return (
           <MouseDownRemoveDiv
@@ -70,12 +70,12 @@ function BlockedLocations() {
           </MouseDownRemoveDiv>
         );
       })}
-      <form onSubmit={addLocations}>
-        <select name="locationType">
-          <option value="url">url</option>
-          <option value="category">category</option>
+      <form class = "dropdown" onSubmit={addLocations}>
+        <select class = "dropbtn" name="locationType">
+          <option class = "dropdown-content" value="url">urls</option>
+          <option class = "dropdown-content" value="category">categories</option>
         </select>
-        <input type="text" name="location" />
+        <input class="inputInput" type="text" name="location" />
       </form>
     </div>
   );

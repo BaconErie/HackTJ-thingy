@@ -10,10 +10,13 @@ function Header() {
 
   return (
     <header className="header">
-      Header Name
+      ProcrastiNOT
+      <h3>
+        Getting Your Work Done, One Task At A Time
+      </h3>
       <div className="blockedLocations">
-        <button id="toggleBlockedLocations" onClick={handleLocationsToggle}>
-          Open
+        <button class = "edit" id="toggleBlockedLocations" onClick={handleLocationsToggle}>
+          Edit Preferences
         </button>
         {showLocations && <BlockedLocations id="blockedLocations" />}
       </div>
