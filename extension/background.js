@@ -1,14 +1,14 @@
 async function urlChanged(tabId, changeInfo, tab) {
   const url = changeInfo.url;
-  const getThing = await chrome.storage.local.get(["userId"]);
-  const userId = getThing.key;
+  const getThing = await chrome.storage.local.get(["userID"]);
+  const userID = getThing.key;
 
   let data = {
     url: url,
-    userId: userId
+    userID: userID
   };
 
-  let response = await fetch("http://localhost:3500/API/Extension", {
+  let response = await fetch("http://localhost:4000/API/Extension", {
     method: "POST",
     body: JSON.stringify(data),
     headers: { "Content-Type": "application/json" }
@@ -40,8 +40,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 chrome.runtime.onMessageExternal.addListener(
   (request, sender, sendResponse) => {
-    let userId = request.userId;
+    let userID = request.userID;
 
-    chrome.storage.local.set({ userId: userId });
+    chrome.storage.local.set({ userID: userID });
   }
 );
