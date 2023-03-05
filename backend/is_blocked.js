@@ -31,4 +31,6 @@ export default async function isABlockedCategory(categories, url) {
 
     return false;
 }
+/* TEST CODE
 console.log(await isABlockedCategory(['game'], 'https://www.youtube.com/watch?v=TlB_eWDSMt4'));
+*/
