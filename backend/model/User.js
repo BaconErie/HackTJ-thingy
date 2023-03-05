@@ -1,29 +1,28 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-
-    breakTime: {
-        type: Boolean,
-    },
-    
-    tasks:[{
+  priorities: {
+    type: [
+      {
         name: String,
-        expectedTime: Number,
-        actualTime: Number,
-        required: true
-    }],
-
-    blockedCategories: [{
-        type: String,
-        count: Number,
-        required: true
-    }],
- 
+        ExpectedTime: Number
+      }
+    ],
+    default: []
+  },
+  locations: {
+    url: {
+      type: [String],
+      default: []
+    },
+    categories: {
+      type: [String],
+      default: []
+    }
+  },
+  isBreak: Boolean,
+  userID: String
 });
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model("User", userSchema);

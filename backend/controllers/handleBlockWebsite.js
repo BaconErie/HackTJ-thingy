@@ -1,6 +1,44 @@
-const isABlockedCategory = require("../ExtensionHelperFunctions/is_blocked");
+const openaiLib = require("openai");
+const { Configuration, OpenAIApi } = openaiLib;
 
-const handleBlockWebsite = (req, res) => {
+/*
+import {Configuration, OpenAIApi} from 'openai';
+*/
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_KEY
+});
+
+const openai = new OpenAIApi(configuration);
+
+async function isABlockedCategory(categories, url) {
+  let response = await fetch(url);
+  const content = await response.text();
+
+  let regex = /(?<=<title>)(.*)(?=<\/title>)/g;
+
+  let title = content.match(regex)[0];
+
+  for (let category of categories) {
+    const completion = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `Is ${title} related to ${category}? Yes or No?`,
+      temperature: 0.0
+    });
+
+    let output = completion.data.choices[0].text;
+
+    if (output.includes("Yes")) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+const UserModel = require("../model/User");
+
+const handleBlockWebsite = async (req, res) => {
   /**
    * 1. get user id (req.body.userID)
    * 2. given user id exists, get userData
@@ -9,11 +47,9 @@ const handleBlockWebsite = (req, res) => {
 
   const { userID, url } = req.body;
 
-  const userData = null; // DEVIN PLEASE ADD DETAILS
+  const userData = await UserModel.findOne({ userID: userID });
 
-  const { urls, categories } = userData;
-
-  const isBreak = null; // DEVIN JUST PUT WHETHER OR NOT IS BREAK INTO THIS VARIABLE. TYPE BOOl.
+  const { urls, categories, isBreak } = userData;
 
   if (isBreak) {
     res.json({ block: true });

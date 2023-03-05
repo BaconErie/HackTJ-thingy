@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require("cors");
+const PORT = 4000;
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
@@ -22,9 +23,11 @@ app.use(express.json());
 
 app.use(logger);
 
-app.use("/", require("./Routes/root"));
-app.use("/API", require("./Routes/API/DB"));
+app.use("/API", require("./Routes/API/APIBranch"));
 
 app.use(errorHandler);
 
-const PORT = 3500;
+mongoose.connection.once("open", () => {
+  console.log("Connected to MongoDB");
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+});
