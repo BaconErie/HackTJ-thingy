@@ -1,0 +1,22 @@
+.header{
+    position : relative;
+
+    height : 50px;
+}
+
+.blockedLocations{
+    position: absolute;
+    background-color: lightblue;
+
+    right : 0;
+    bottom: 0;
+
+    width : 250px;
+}
+.blockedLocations button{
+    width : 100%;
+}
+
+.main {
+    display: flex
+}

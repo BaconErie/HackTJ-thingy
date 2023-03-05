@@ -1,10 +1,10 @@
-const express = require("express");
-const Router = express.Router();
-const path = require("path");
+import express from "express";
+import path from "path";
+const Router = express.Router;
 
-Router.route("/").get((req, res) => {
-  //if there is no cookie, i must send them a cookie here
-  res.sendFile(path.join(__dirname, "..", "..", "frontend", "index.html"));
-});
+Router.route("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "Views", "index.html"));
+})
 
-module.exports = Router;
+
+export default Router;

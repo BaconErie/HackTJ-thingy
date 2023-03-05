@@ -1,5 +1,4 @@
 const isABlockedCategory = require("../ExtensionHelperFunctions/is_blocked");
-const 
 
 const handleBlockWebsite = (req, res) => {
   /**
@@ -20,10 +19,20 @@ const handleBlockWebsite = (req, res) => {
     res.json({ block: true });
   } else {
     if (isABlockedCategory(categories, url)) {
-      res.json({ block: true });
     }
 
-    if ()
+    for (matchUrl of urls) {
+      let matchDomain = new URL(matchUrl).hostName;
+      let inputDomain = new URL(url).hostName;
+
+      if (matchDomain == inputDomain) {
+        res.json({ block: true });
+      }
+    }
+
+    // If we reach here, then we know that it must not be blocked
+    // it is 2:07 am
+    res.json({ block: false });
   }
 };
 
