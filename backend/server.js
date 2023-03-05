@@ -5,6 +5,8 @@ const path = require("path");
 const cors = require("cors");
 const PORT = 4000;
 
+const cookieparser = require("cookie-parser");
+
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 
@@ -19,6 +21,7 @@ connectDB();
 app.use(credentials);
 app.use(express.urlencoded({ extended: false }));
 app.use(cors(corsOptions));
+app.use(cookieparser());
 app.use(express.json());
 
 app.use(logger);

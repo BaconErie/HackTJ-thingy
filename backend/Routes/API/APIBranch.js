@@ -3,18 +3,18 @@ const Router = express.Router();
 
 const handleBlockWebsite = require("../../controllers/handleBlockWebsite");
 const handleGetUserInfo = require("../../controllers/handleGetUserInfo");
-const handleAddUser = require("../../controllers/handleUpdateBreak");
+const handleAddUser = require("../../controllers/handleAddUser");
 
 const handleUpdateBreak = require("../../controllers/handleUpdateBreak");
 const handleUpdateLocation = require("../../controllers/handleUpdateLocation");
 const handleUpdatePriorites = require("../../controllers/handleUpdateLocation");
 
-Router.post("/Extension", handleBlockWebsite);
+Router.route("/DB/ADD").post(handleAddUser);
+Router.route("/DB/POST/UserInfo").post(handleGetUserInfo);
+Router.route("/Extension").post(handleBlockWebsite);
 
-Router.post("/DB/ADD", handleAddUser);
-
-Router.post("/DB/UPDATE-break", handleUpdateBreak);
-Router.post("/DB/UPDATE-Location", handleUpdateLocation);
-Router.post("/DB/UPDATE-Priorities", handleUpdatePriorites);
+Router.route("/DB/UPDATE/break").patch(handleUpdateBreak);
+Router.route("/DB/UPDATE/Location").patch(handleUpdateLocation);
+Router.route("/DB/UPDATE/Priorities").patch(handleUpdatePriorites);
 
 module.exports = Router;

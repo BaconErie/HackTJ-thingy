@@ -21,7 +21,10 @@ const userSchema = new Schema({
       default: []
     }
   },
-  isBreak: Boolean,
+  isBreak: {
+    type: Boolean,
+    default: false
+  },
   userID: String
 });
 
