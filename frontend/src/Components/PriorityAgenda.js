@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import MouseDownRemoveDiv from "./MouseDownRemoveDiv";
 
-function TaskAgenda() {
-  const [TaskList, setTaskList] = useState([]);
+function PriorityAgenda({ initPriorities, initBreak }) {
+  const [TaskList, setTaskList] = useState(
+    initPriorities ? initPriorities : []
+  );
+  const [isBreak, setIsBreak] = useState(initBreak ? initBreak : false);
 
   const addTask = (event) => {
     event.preventDefault();
@@ -14,6 +17,9 @@ function TaskAgenda() {
     };
 
     setTaskList([...TaskList, newTask]);
+
+    savePriorityToDB();
+    saveIsBreakToDB();
   };
 
   const handleDeleteTask = (indexToFilter) => {
@@ -22,6 +28,45 @@ function TaskAgenda() {
         return index !== indexToFilter;
       })
     );
+
+    savePriorityToDB();
+    saveIsBreakToDB();
+  };
+
+  const savePriorityToDB = async () => {
+    window.getCookie = function (name) {
+      var match = document.cookie.match(
+        new RegExp("(^| )" + name + "=([^;]+)")
+      );
+      if (match) return match[2];
+    };
+
+    let { userID } = window.getCookie("userID");
+    const body = {
+      userID: userID,
+      priorities: TaskList
+    };
+
+    await fetch("http://localhost:4000/API/DB/UPDATE/Priorities", {
+      method: "PATCH",
+      body: body
+    });
+  };
+
+  const saveIsBreakToDB = async () => {
+    const determineBreak = TaskList[0].name === "break" ? true : false;
+
+    if (determineBreak !== isBreak) {
+      await fetch("http://localhost:4000/API/DB/UPDATE/break", {
+        method: "PATCH",
+        body: {
+          userID: document.cookie,
+          isBreak: determineBreak
+        }
+      });
+
+      setIsBreak(determineBreak);
+    }
   };
 
   return (
@@ -51,4 +96,4 @@ function TaskAgenda() {
   );
 }
 
-export default TaskAgenda;
+export default PriorityAgenda;

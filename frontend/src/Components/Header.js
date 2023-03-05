@@ -1,7 +1,7 @@
 import { useState } from "react";
 import BlockedLocations from "./BlockedLocations";
 
-function Header() {
+function Header({ locations }) {
   const [showLocations, setShowLocation] = useState(false);
 
   const handleLocationsToggle = () => {
@@ -15,7 +15,9 @@ function Header() {
         <button id="toggleBlockedLocations" onClick={handleLocationsToggle}>
           Open
         </button>
-        {showLocations && <BlockedLocations id="blockedLocations" />}
+        {showLocations && (
+          <BlockedLocations id="blockedLocations" locations={locations} />
+        )}
       </div>
     </header>
   );

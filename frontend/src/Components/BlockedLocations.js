@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import MouseDownRemoveDiv from "./MouseDownRemoveDiv";
 
-function BlockedLocations() {
-  const [blockedLocations, setBlockedLocations] = useState({
-    url: [],
-    category: []
-  });
+function BlockedLocations({ locations }) {
+  const [blockedLocations, setBlockedLocations] = useState(
+    locations
+      ? locations
+      : {
+          categories: [],
+          urls: []
+        }
+  );
 
   const addLocations = (event) => {
     event.preventDefault();
@@ -26,6 +30,8 @@ function BlockedLocations() {
       currentBlockedLocation[locationType].push(location);
 
       setBlockedLocations(currentBlockedLocation);
+
+      saveLocationsToDB();
     }
   };
 
@@ -39,10 +45,31 @@ function BlockedLocations() {
     );
 
     setBlockedLocations(newBlockedLocations);
+
+    saveLocationsToDB();
   };
 
   console.log(blockedLocations.url);
   console.log(blockedLocations.category);
+
+  const saveLocationsToDB = async () => {
+    window.getCookie = function (name) {
+      var match = document.cookie.match(
+        new RegExp("(^| )" + name + "=([^;]+)")
+      );
+      if (match) return match[2];
+    };
+
+    const { userID } = window.getCookie("userID");
+
+    await fetch("http://localhost:4000/API/DB/UPDATE/Location", {
+      method: "PATCH",
+      body: {
+        userID: userID,
+        locations: blockedLocations
+      }
+    });
+  };
 
   return (
     <div>
